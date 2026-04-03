@@ -1,23 +1,506 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "기아 EV4 유지비 분석: 2026년 예상 충전비용, 세금, 수리비 총정리",
+  "url": "https://www.example.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.example.com/?s={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "기아 EV4의 예상 충전비용은 내연기관 차량의 주유비와 비교해 어느 정도 차이가 나나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "일반적으로 전기차 충전비용은 내연기관 차량의 주유비 대비 20~30% 수준으로 저렴합니다. EV4의 경우 1회 완충 시 주행 가능 거리를 고려할 때, 월평균 충전비용은 운전 습관과 충전 인프라(가정용 심야 충전 vs. 공용 급속 충전)에 따라 5만 원에서 10만 원대로 예상됩니다. 이는 일반 차량의 월 주유비 20~30만 원과 비교해 큰 폭의 절감 효과입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "기아 EV4 구매 시 받을 수 있는 정부 및 지자체 보조금 혜택은 얼마나 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2026년 기아 EV4에 대한 정확한 보조금 규모는 출시 시점의 정부 정책에 따라 달라지지만, 전기차 보조금 제도는 매년 축소되는 추세입니다. 그러나 EV4가 중소형급 전기차로 출시될 경우, 국비와 지자체 보조금을 합쳐 수백만 원대의 혜택을 받을 수 있을 것으로 예상됩니다. 구매 전 '무공해차 통합누리집'에서 최신 정보를 확인하는 것이 필수입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "전기차 유지비에서 가장 큰 변수는 무엇이며, 절약 노하우가 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "전기차 유지비의 가장 큰 변수는 '충전 방식'입니다. 아파트나 주택에서 '심야 충전'을 이용하면 전기 요금이 가장 저렴합니다. 반면 '급속 충전'을 자주 이용하면 비용이 증가합니다. 또한 '전기차 전용 보험 특약'을 통해 일반 차량보다 저렴한 보험료를, '첨단 안전장치 할인'을 통해 추가 할인을 받을 수 있습니다. 주행거리 1만km 미만 운전자는 '마일리지 특약'을 활용해 보험료를 절감할 수 있습니다."
+        }
+      }
+    ]
+  }
+</script>
+
+<style>
+    :root {
+        --primary-color: #0070c0; /* 기아의 상징적인 파란색 */
+        --secondary-color: #00a0e9; /* 부드러운 하늘색 */
+        --accent-color: #ff9900; /* 주황색 (CTA, 강조) */
+        --text-color: #333333; /* 진한 회색 */
+        --bg-light: #f7f9fb; /* 매우 밝은 배경 */
+        --bg-card: #FFFFFF; /* 카드 배경 흰색 */
+        --btn-cta: #00bfff; /* CTA 버튼 색상 */
+        --border-light: #e0e0e0;
+        --shadow-light: rgba(0, 0, 0, 0.08);
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+    body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; background-color: var(--bg-light); color: var(--text-color); line-height: 1.8; font-weight: 400; font-size: 16px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+
+    /* Header */
+    header { background-color: var(--bg-card); padding: 20px 0; border-bottom: 1px solid var(--border-light); box-shadow: 0 2px 5px var(--shadow-light); }
+    header h1 { margin: 0; font-size: 2.2em; color: var(--primary-color); font-weight: 700; text-align: center; line-height: 1.3; }
+    header h1 a { text-decoration: none; color: inherit; }
+
+    /* Hero Section */
+    .hero { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: #fff; text-align: center; padding: 100px 20px 60px; position: relative; overflow: hidden; }
+    .hero h1 { font-size: 3.8em; margin-bottom: 20px; font-weight: 900; line-height: 1.2; }
+    .hero p { font-size: 1.5em; margin-bottom: 40px; font-weight: 300; line-height: 1.5; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.pexels.com/photos/1035108/pexels-photo-1035108.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center/cover; opacity: 0.1; z-index: 0; }
+    .hero .container { position: relative; z-index: 1; }
+
+    /* CTA Button */
+    .cta-btn { background-color: var(--accent-color); color: #fff; padding: 18px 40px; font-size: 1.3em; font-weight: 700; border: none; border-radius: 50px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s; box-shadow: 0 6px 15px rgba(0,0,0,0.2); text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 1px; }
+    .cta-btn:hover { background-color: #e68a00; transform: translateY(-3px); }
+
+    /* Form Section (TCO Consultation) */
+    .tco-consultation-box { background-color: var(--bg-card); padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px var(--shadow-light); margin: -40px auto 40px; max-width: 900px; }
+    .tco-consultation-box h2 { color: var(--primary-color); text-align: center; margin-bottom: 30px; font-size: 2.5em; font-weight: 900; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .form-group { margin-bottom: 15px; }
+    .tco-consultation-box label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-color); font-size: 1em; }
+    .tco-consultation-box input[type="text"],
+    .tco-consultation-box input[type="tel"],
+    .tco-consultation-box input[type="date"],
+    .tco-consultation-box select {
+        width: 100%; padding: 14px; border: 1px solid var(--border-light); border-radius: 8px; box-sizing: border-box;
+        font-size: 1em; transition: border-color 0.3s; background-color: var(--bg-light);
+    }
+    .tco-consultation-box input:focus, .tco-consultation-box select:focus { border-color: var(--secondary-color); outline: none; box-shadow: 0 0 5px rgba(0, 160, 233, 0.3); }
+    .form-full { grid-column: 1 / -1; text-align: center; margin-top: 20px; }
+
+    /* Content Sections */
+    .content-section { background-color: var(--bg-card); padding: 50px 0; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 15px var(--shadow-light); }
+    .content-section h2 { font-size: 2.8em; color: var(--primary-color); border-bottom: 4px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 40px; text-align: left; font-weight: 900; letter-spacing: -1px; }
+    .content-section h3 { font-size: 2em; color: var(--secondary-color); margin-top: 35px; margin-bottom: 15px; font-weight: 700; border-left: 5px solid var(--accent-color); padding-left: 15px; }
+    .content-section h4 { font-size: 1.5em; color: var(--text-color); margin-top: 20px; margin-bottom: 10px; font-weight: 500; }
+    .content-section p { margin-bottom: 20px; line-height: 1.8; color: #555; }
+    .highlight { background-color: #f2faff; padding: 20px; border-radius: 8px; border-left: 5px solid var(--secondary-color); margin: 25px 0; }
+    .highlight p { margin: 0; font-style: italic; color: var(--text-color); }
+
+    /* Comparative Table */
+    .data-table { margin: 30px auto; width: 100%; border-collapse: collapse; text-align: left; table-layout: fixed; }
+    .data-table th, .data-table td { padding: 15px; border: 1px solid var(--border-light); }
+    .data-table th { background-color: var(--primary-color); color: #fff; font-weight: 700; text-align: center; }
+    .data-table td { text-align: center; }
+    .data-table tr:nth-child(even) { background-color: var(--bg-light); }
+
+    /* List Styles */
+    ul { list-style: none; padding-left: 0; margin-bottom: 20px; }
+    ul li { position: relative; padding-left: 25px; margin-bottom: 10px; font-size: 1em; }
+    ul li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-color); font-weight: 700; }
+    ol { margin-left: 20px; margin-bottom: 20px; }
+    ol li { margin-bottom: 10px; line-height: 1.6; }
+
+    /* FAQ Section */
+    .faq-item { border-bottom: 1px solid var(--border-light); padding: 15px 0; }
+    .faq-item h3 { cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1.3em; color: var(--primary-color); font-weight: 700; transition: color 0.3s; }
+    .faq-item h3:hover { color: var(--secondary-color); }
+    .faq-item h3::after { content: '▼'; font-size: 0.8em; color: var(--accent-color); transition: transform 0.3s; }
+    .faq-item.active h3::after { transform: rotate(180deg); }
+    .faq-item p { display: none; padding: 15px 20px; color: #555; background-color: #fcfcfc; border-left: 3px solid var(--secondary-color); margin-top: 10px; line-height: 1.7; }
+    .faq-item.active p { display: block; }
+
+    /* Keyword List */
+    .keyword-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; margin-top: 30px; gap: 10px; }
+    .keyword-list li { background-color: var(--primary-color); color: #fff; padding: 8px 18px; border-radius: 25px; font-weight: 400; font-size: 0.9em; transition: background-color 0.3s; }
+    .keyword-list li:hover { background-color: var(--secondary-color); cursor: default; }
+
+    /* External Links/Authority */
+    .authority-links { margin-top: 40px; text-align: center; }
+    .authority-links a { display: inline-block; background-color: var(--secondary-color); color: #fff; padding: 10px 20px; border-radius: 5px; margin: 5px; text-decoration: none; font-weight: 500; transition: background-color 0.3s; }
+    .authority-links a:hover { background-color: #008cd1; }
+
+    /* Footer */
+    footer { background-color: var(--primary-color); color: #EFEFEF; text-align: center; padding: 40px 20px; font-size: 0.9em; margin-top: 30px; }
+    footer a { color: #fff; text-decoration: none; margin: 0 10px; transition: text-decoration 0.3s; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 900px) {
+        .form-grid { grid-template-columns: 1fr; }
+        .hero h1 { font-size: 3em; }
+        .hero p { font-size: 1.3em; }
+    }
+    @media (max-width: 600px) {
+        .hero h1 { font-size: 2.2em; }
+        .hero p { font-size: 1.1em; }
+        .cta-btn { padding: 15px 25px; font-size: 1.1em; }
+        .content-section h2 { font-size: 2em; }
+        .content-section h3 { font-size: 1.6em; }
+        .content-section h4 { font-size: 1.3em; }
+    }
+</style>
+</head> <body>
+
+<header>
+    <div class="container">
+        <h1><a href="/">기아 EV4 유지비 분석: 2026년 예상 충전비용, 세금, 수리비 총정리</a></h1>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <h1>기아 **EV4 유지비** 완벽 분석: 2026년 전기차 시대의 합리적인 선택</h1>
+            <p>2026년 출시가 예상되는 기아 EV4, 과연 내연기관차 대비 얼마나 절약될까? **충전비용, 세금, 보조금, 수리비**까지 꼼꼼하게 따져보는 **EV4 예상 유지비** 가이드입니다.</p>
+        </div>
+    </section>
+
+    <section class="tco-consultation-box container">
+        <h2>**기아 EV4** 예상 유지비(TCO) 견적 및 보조금 혜택 상담 신청</h2>
+        <p style="text-align: center; font-size: 1.1em; color: var(--accent-color); font-weight: 500;">EV4 구매 전, 예상 비용과 정부 지원 혜택을 전문가와 함께 꼼꼼하게 비교 분석하여 합리적인 구매 계획을 세워보세요.</p>
+        <form action="#" method="post">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">이름 (필수)</label>
+                    <input type="text" id="name" placeholder="실명을 입력하세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">연락처 (필수)</label>
+                    <input type="tel" id="phone" placeholder="휴대폰 번호를 입력하세요" required>
+                </div>
+                <div class="form-group">
+                    <label for="car-model">관심 차종</label>
+                    <input type="text" id="car-model" value="기아 EV4" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="purchase-time">구매 희망 시기</label>
+                    <select id="purchase-time" required>
+                        <option value="">시기 선택</option>
+                        <option value="within-3m">3개월 이내</option>
+                        <option value="within-6m">6개월 이내</option>
+                        <option value="within-1y">1년 이내</option>
+                        <option value="undecided">미정</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mileage">예상 연간 주행거리 (km)</label>
+                    <input type="text" id="mileage" placeholder="예: 15000" required>
+                </div>
+                <div class="form-group">
+                    <label for="charging-env">주요 충전 환경</label>
+                    <select id="charging-env">
+                        <option value="home">집밥(가정용 충전기)</option>
+                        <option value="public-fast">공용 급속 충전소 위주</option>
+                        <option value="public-slow">공용 완속 충전소 위주</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="current-car">현재 보유 차량</label>
+                    <input type="text" id="current-car" placeholder="예: 현대 아반떼 2020년식">
+                </div>
+                <div class="form-group">
+                    <label for="driver-range">운전자 범위 및 나이</label>
+                    <select id="driver-range">
+                        <option value="1">1인 운전 (만 30세 이상)</option>
+                        <option value="2">부부 운전</option>
+                        <option value="3">가족 운전</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-full">
+                <button type="submit" class="cta-btn">**EV4 예상 유지비** 분석 보고서 받기</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Part 1. **기아 EV4 유지비** 종합 분석: 내연기관차와 비교한 TCO의 진실</h2>
+            <p>
+                2026년 전기차 시장의 기대주로 떠오르는 기아 EV4는 합리적인 가격과 효율성을 갖춘 모델로 예상됩니다. 하지만 전기차 구매를 망설이는 가장 큰 이유는 여전히 높은 '초기 구매 가격'과 막연한 '유지비 불안감' 때문입니다. 과연 **기아 EV4 유지비**는 내연기관차와 비교했을 때 정말 저렴할까요? 전문가들은 **EV4 유지비**가 일반 가솔린 차량 대비 획기적으로 낮을 것으로 예상합니다. **총 소유 비용(TCO, Total Cost of Ownership)** 측면에서 EV4의 장점을 심층 분석해 보겠습니다.
+            </p>
+
+            <h3>1.1. **EV4 충전비용** 분석: 전기차 유지비의 핵심 변수</h3>
+            <p>
+                **기아 EV4**의 유지비에서 가장 큰 비중을 차지하는 것은 연료비, 즉 전기 충전 비용입니다. 전기차의 충전 비용은 충전 인프라(가정용 충전기, 공용 완속, 공용 급속)와 전기 요금제에 따라 크게 달라집니다. 특히 2026년에는 전기차 보급 확대로 인해 충전 요금 할인 혜택이 점차 축소될 가능성이 높지만, 여전히 내연기관 차량의 주유비보다는 압도적으로 저렴합니다.
+            </p>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>기아 EV4 (전기)</th>
+                        <th>준중형 가솔린 차량 (내연기관)</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>월 평균 연료비 (전기 vs. 휘발유)</td>
+                        <td>5만 원 ~ 10만 원 (심야 충전 기준)</td>
+                        <td>20만 원 ~ 30만 원 (연비 12km/L 기준)</td>
+                        <td>**EV4 유지비** 압도적 우위</td>
+                    </tr>
+                    <tr>
+                        <td>연간 자동차세</td>
+                        <td>10만 원 미만 (교육세 포함)</td>
+                        <td>약 25만 원 ~ 35만 원 (배기량 1,600cc 기준)</td>
+                        <td>**기아 EV4** 세금 혜택</td>
+                    </tr>
+                    <tr>
+                        <td>소모품 교환 비용</td>
+                        <td>낮음 (엔진오일, 미션오일 없음)</td>
+                        <td>높음 (주기적 엔진오일 등 교환)</td>
+                        <td>엔진 부품 비용 절감</td>
+                    </tr>
+                    <tr>
+                        <td>수리비 발생 가능성</td>
+                        <td>배터리 관련 수리 시 고가</td>
+                        <td>일반 수리 용이, 부품 교환 빈번</td>
+                        <td>**EV4**는 보증기간이 중요함</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>1.1.1. 충전 요금 절약의 핵심: '집밥'과 '심야 충전'</h4>
+            <p>
+                **EV4 유지비**를 최저로 낮추는 방법은 '집밥(가정용 충전기)'을 설치하고 '심야 충전'을 활용하는 것입니다. 한국전력공사의 계시별 요금제를 적용하면 심야 시간대(밤 11시~아침 9시)에는 낮 시간대 대비 30% 이상 저렴한 가격으로 충전이 가능합니다. 이 방식을 활용하면 EV4의 월평균 충전비용을 5만 원대까지 낮출 수 있습니다. 이는 **가장 저렴한 전기차 유지비**를 실현하는 비결입니다.
+            </p>
+            <div class="highlight">
+                <p><strong>[유지비 절약 팁]</strong> **기아 EV4**를 구매할 때 주거 환경을 고려하여 충전기 설치 가능 여부를 확인하세요. 충전 환경이 곧 **기아 EV4 유지비**를 결정하는 핵심 요소입니다.</p>
+            </div>
+
+            <h3>1.2. **기아 EV4** 세금 및 보조금 혜택 분석</h3>
+            <p>
+                **기아 EV4** 구매 시, 내연기관차와 비교하여 세금 면에서 상당한 혜택을 받을 수 있습니다.
+                <br>
+                1. **자동차세:** 내연기관차는 배기량에 따라 세금이 부과되지만, 전기차는 비영업용 승용차 기준으로 배기량과 무관하게 연 10만 원(지방교육세 포함)의 정액 세금만 납부합니다.
+                2. **취득세:** 전기차는 취득세 감면 혜택을 받습니다. 2026년 정책에 따라 정확한 감면 한도는 달라질 수 있으나, 보통 140만 원까지 감면됩니다.
+                3. **공채(공공채권) 면제:** 서울특별시를 비롯한 지자체에서는 전기차 구매 시 의무적으로 매입해야 하는 도시철도채권, 지역개발채권 매입 의무가 면제됩니다.
+                4. **보조금 혜택:** **기아 EV4**가 2026년 출시되면 정부 및 지자체 **보조금** 혜택을 받을 수 있습니다. 보조금은 매년 축소되는 추세이지만, EV4의 가격대가 5,700만 원 미만일 경우 전액 보조금 혜택을 받을 수 있을 것으로 예상됩니다.
+            </p>
+
+            <h3>1.3. **EV4 보험료** 분석: 전기차 보험료의 특징</h3>
+            <p>
+                전기차는 일반 차량에 비해 보험료가 비싸다는 인식이 있습니다. 이는 수리비가 비싼 배터리 관련 부품 때문에 '자차 보험료'가 높게 책정되기 때문입니다. 하지만 **기아 EV4**의 보험료를 절약할 수 있는 다양한 방법이 있습니다.
+                <br>
+                *   **전기차 전용 보험 특약:** 일부 보험사는 전기차 특화 상품을 출시하여 충전 중 사고에 대한 보상, 견인 거리 확대, 배터리 관련 특별 보상 등 다양한 혜택을 제공하며, 일반 보험 대비 **저렴한** 보험료를 제공합니다.
+                *   **운전 습관 할인 특약:** T맵(T map)이나 카카오내비 같은 내비게이션 앱의 안전 운전 점수를 활용한 할인(UBI 특약)은 전기차 운전자에게도 적용됩니다. 안전 운전 습관을 유지하면 **기아 EV4 보험료**를 최대 10%까지 절감할 수 있습니다.
+                *   **마일리지 특약:** 연간 주행거리가 짧은 운전자(1만 km 미만)에게는 마일리지 특약이 필수입니다. 주행거리가 짧을수록 **EV4 유지비** 중 보험료를 크게 줄일 수 있습니다. **자동차보험료비교사이트순위** 정보를 참고하여 **가장싼** 보험사를 선택하는 것도 중요합니다.
+            </p>
+            <p>
+                이러한 **보험료 할인** 특약들을 잘 활용하면 **기아 EV4 유지비**의 부담을 크게 줄일 수 있습니다. **다이렉트자동차보험비교사이트순위**를 참고하여 여러 보험사의 견적을 받아보는 것이 좋습니다.
+            </p>
+
+            <h3>1.4. **EV4 수리비 및 소모품** 분석: 전기차의 장단점</h3>
+            <p>
+                **기아 EV4 유지비**에서 소모품 비용은 내연기관차 대비 현저히 낮습니다. 엔진오일, 미션오일, 점화플러그 등 엔진 관련 부품이 없으므로 정기적인 소모품 교체 주기가 길어집니다. 특히 브레이크 패드는 회생 제동 기능으로 인해 사용량이 적어 수명이 길어집니다.
+                <br>
+                그러나 **단점**도 존재합니다. 사고 시 배터리 팩 손상이나 모터 고장 시 수리비가 높게 발생할 수 있습니다. 특히 배터리 교체 비용은 수백만 원에서 천만 원대까지 형성될 수 있어, **EV4** 구매 시 보증 기간을 꼼꼼히 확인하고, **자기차량손해(자차)** 보험 가입 시 자기부담금을 적절하게 설정하는 것이 중요합니다.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Part 2. 2026년 **기아 EV4** 예상 스펙과 구매 시 고려 사항</h2>
+            <p>
+                **기아 EV4**는 2026년 출시를 목표로 개발되고 있으며, 기아의 전기차 라인업에서 엔트리급 SUV 포지션을 맡을 것으로 예상됩니다. EV4는 합리적인 **가격**과 실용적인 주행 거리를 목표로 하여, 전기차 대중화에 기여할 것으로 보입니다. 예상 스펙은 다음과 같습니다.
+            </p>
+
+            <h3>2.1. 예상 스펙 및 전비 (주행거리/효율)</h3>
+            <p>
+                **기아 EV4**는 400V급 플랫폼을 기반으로 하며, 예상 주행 거리는 1회 완충 시 350km~400km 내외(WLTP 기준)로 예상됩니다. 이는 도심 운행이나 근거리 출퇴근용으로 충분한 수준입니다. **EV4의 전비**가 높을수록 **유지비**가 절약되므로, 연비를 꼼꼼히 따져봐야 합니다.
+            </p>
+
+            <h3>2.2. **EV4 보조금** 혜택: 구매 비용 절감의 핵심</h3>
+            <p>
+                **EV4**의 초기 **구매 비용**을 낮추는 가장 확실한 방법은 정부 및 지자체 **보조금**을 활용하는 것입니다. 2026년에는 전기차 보조금 제도가 개편되어, **AI 기반**의 효율성 평가를 통해 보조금이 차등 지급될 수 있습니다. **EV4**의 에너지 효율 등급이 높을 경우 더 많은 보조금을 받을 수 있습니다.
+                <br>
+                *   **국비 보조금:** 전기차 성능 및 배터리 재활용 평가에 따라 지급됩니다.
+                *   **지자체 보조금:** 거주 지역에 따라 추가로 지급됩니다.
+                *   **추가 할인:** 다자녀 가구, 생애 첫차 구매자, 택시 사업자 등에게 추가 할인이 제공됩니다.
+                <br>
+                **기아 EV4**의 **가장 저렴한 가격**은 이러한 **보조금**과 **할인 혜택**을 모두 합산하여 결정됩니다.
+            </p>
+
+            <h3>2.3. **기아 EV4 장단점** 비교: 구매 전 반드시 확인해야 할 사항</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>장점 (Pros)</th>
+                        <th>단점 (Cons)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. 압도적으로 낮은 **기아 EV4 유지비** (충전비용, 세금)</td>
+                        <td>1. 내연기관차 대비 높은 초기 **구매 가격**</td>
+                    </tr>
+                    <tr>
+                        <td>2. 정숙하고 부드러운 승차감 및 주행 성능</td>
+                        <td>2. **충전 인프라** 부족 시 불편함 (여행 시)</td>
+                    </tr>
+                    <tr>
+                        <td>3. 각종 정부/지자체 **보조금** 및 **할인 혜택**</td>
+                        <td>3. **배터리 수명** 및 교체 비용에 대한 불안감</td>
+                    </tr>
+                    <tr>
+                        <td>4. 미래지향적인 디자인과 첨단 기술 (예상)</td>
+                        <td>4. 겨울철 주행거리 감소 (히터 사용 시)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                **기아 EV4**는 2026년 시장에서 **가성비**를 앞세워 전기차 판매 순위를 높일 것으로 기대됩니다. **EV4 내돈내산** 후기를 검색하는 예비 오너라면, 위의 장단점을 꼼꼼히 비교하여 본인의 운전 환경에 적합한지 판단해야 합니다.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Part 3. **기아 EV4 유지비** 절감을 위한 실용적인 팁과 노하우</h2>
+            <p>
+                **EV4**의 유지비를 최적화하기 위해서는 단순한 구매 비용 비교를 넘어선 심화 전략이 필요합니다. 2026년 **전기차 유지비** 절감 노하우를 소개합니다.
+            </p>
+
+            <h3>3.1. **보험료 할인** 극대화 전략: 다이렉트 보험 비교의 힘</h3>
+            <p>
+                **기아 EV4** 보험료는 일반 내연기관차보다 비쌀 수 있으므로, **다이렉트자동차보험비교사이트순위** 정보를 참고하여 **저렴한곳**을 찾는 것이 중요합니다. 특히 **AI** 기반의 보험료 산정 시스템을 통해 다양한 할인 특약을 자동으로 적용받을 수 있습니다.
+                <br>
+                *   **블랙박스 할인:** 블랙박스 장착만으로도 보험료 할인이 가능합니다.
+                *   **자녀 할인 특약:** 만 6세 이하 자녀가 있는 운전자는 **자녀 할인 특약**을 통해 추가 할인을 받을 수 있습니다.
+                *   **첨단 안전장치 할인:** **EV4**에 탑재될 차선 이탈 경고 장치(LDWS), 전방 충돌 방지 보조 장치(FCA) 등의 ADAS 기능은 보험료 할인으로 이어집니다.
+            </p>
+
+            <h3>3.2. **EV4 충전비용** 절감을 위한 충전 습관 관리</h3>
+            <p>
+                **기아 EV4 유지비**의 70% 이상을 차지하는 충전 비용을 절약하기 위해 **충전 습관**을 개선해야 합니다.
+                <br>
+                1. **공용 급속 충전소:** 급할 때만 이용하고, 평소에는 **완속 충전**을 활용하는 것이 좋습니다. 급속 충전은 완속 충전보다 요금이 비쌉니다.
+                2. **전기 요금제 활용:** 가정용 충전기를 사용한다면 심야 시간대 충전을 생활화하세요.
+                3. **공공 인프라 혜택:** 마트, 백화점 등 공공시설 주차장의 무료 충전소를 적극적으로 활용하는 것도 좋은 방법입니다.
+            </p>
+
+            <h3>3.3. **기아 EV4 수리비** 절감을 위한 보증기간 확인</h3>
+            <p>
+                **기아 EV4**는 배터리 보증 기간이 중요합니다. 기아는 보통 10년/20만km의 배터리 보증을 제공합니다. 이는 고가 부품인 배터리 교체 비용에 대한 부담을 크게 줄여줍니다. **EV4** 구매 시 **내돈내산** 후기를 참고하여 보증 기간 내 수리 경험을 확인하는 것도 도움이 됩니다.
+            </p>
+
+            <h3>3.4. **함께 많이 찾는** 키워드 및 관련 정보</h3>
+            <ul class="keyword-list">
+                <li>#기아 EV4 예상 가격</li>
+                <li>#기아 EV4 보조금 혜택</li>
+                <li>#전기차 유지비 비교</li>
+                <li>#EV4 충전 인프라</li>
+                <li>#전기차 세금 할인</li>
+                <li>#EV4 단점 디시</li>
+                <li>#EV4 내돈내산 후기</li>
+                <li>#자동차보험료비교</li>
+                <li>#전기차 갱신 보험료</li>
+                <li>#전기차 수리비 전문 업체</li>
+                <li>#전기차 마일리지 특약</li>
+                <li>#기아 EV4 장단점</li>
+                <li>#EV4 예상 견적</li>
+                <li>#EV4 저렴한 충전 방법</li>
+                <li>#EV4 배터리 보증기간</li>
+                <li>#전기차 세금 2026</li>
+                <li>#EV4 가격표</li>
+                <li>#기아 EV4 프로모션</li>
+                <li>#전기차 보험료 순위</li>
+                <li>#EV4 카카오내비 할인</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Part 4. **기아 EV4 유지비** 관련 전문가 심층 분석 (2026년)</h2>
+            <p>
+                **기아 EV4**의 **유지비**를 분석할 때, **AI** 기술의 발전과 전기차 시장의 변화를 고려해야 합니다. 2026년에는 '배터리 렌털 프로그램'이나 'V2G(Vehicle-to-Grid) 기술'이 상용화될 가능성이 높습니다.
+            </p>
+            <h3>4.1. 배터리 렌털 프로그램과 **EV4 유지비**</h3>
+            <p>
+                배터리 렌털은 초기 구매 가격을 낮추고, **배터리 수명**에 대한 불안감을 해소할 수 있는 대안으로 떠오르고 있습니다. **기아 EV4**에도 이러한 프로그램이 도입될 경우, **유지비** 구조가 크게 달라질 수 있습니다. 매달 일정 금액의 렌털료를 지불하는 대신, 고가의 배터리 교체 비용을 부담하지 않아도 되는 장점이 있습니다.
+            </p>
+            <h3>4.2. **EV4 유지비** 절감의 미래: V2G 기술</h3>
+            <p>
+                V2G 기술은 **EV4**의 배터리에 저장된 전기를 전력망에 다시 판매하여 수익을 창출하는 기술입니다. **EV4**를 충전하는 비용뿐만 아니라, 전기를 되팔아 **유지비**를 상쇄하는 시대가 올 수 있습니다. 2026년에는 이러한 기술이 시범 운영될 가능성이 높으며, **기아 EV4**의 TCO를 혁신적으로 낮출 수 있는 잠재력이 있습니다.
+            </p>
+
+            <h3>4.3. **기아 EV4** 구매 전 필수 확인 사항 (Checklist)</h3>
+            <ol>
+                <li>정부 **보조금** 지원 규모 및 조건 (매년 변경됨)</li>
+                <li>주거 환경 내 **충전 인프라** 구축 여부 및 **충전비용** 시뮬레이션</li>
+                <li>각 보험사별 **전기차 특약** 및 **할인 혜택** 비교 (마일리지, 안전운전 등)</li>
+                <li>**EV4**의 배터리 보증 기간 및 조건 (수리비 대비)</li>
+                <li>**내돈내산 후기** 및 **디시(DC) 커뮤니티** 등에서 실제 운전자 경험 확인</li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Part 5. 자주 묻는 질문 (**기아 EV4 유지비** 및 가입 관련)</h2>
+            <div class="faq-item">
+                <h3 id="q1">Q. **기아 EV4** 충전비용을 **가장 저렴하게** 이용하려면 어떤 방법이 있나요?</h3>
+                <p>A. **기아 EV4**의 충전비용을 최소화하는 가장 좋은 방법은 주택 또는 아파트에 **가정용 완속 충전기**를 설치하고, 한국전력공사의 '계시별 요금제'를 적용하여 전기 요금이 저렴한 **심야 시간대(밤 11시~아침 9시)**에 충전하는 것입니다. 이 경우 공용 급속 충전소 대비 30~50%의 비용 절감 효과를 볼 수 있습니다. 만약 주택 환경이 어렵다면, 아파트 관리사무소에 **전기차 충전 인프라** 구축을 문의하고, 완속 충전기를 활용하는 것이 유리합니다.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="q2">Q. **기아 EV4**의 예상 가격대는 어느 정도이며, **보조금**을 받으면 얼마에 구매 가능한가요?</h3>
+                <p>A. **기아 EV4**는 엔트리급 SUV로 출시될 예정이며, 예상 가격대는 3천만 원대 후반에서 4천만 원대 초반으로 예측됩니다. 2026년 정부 및 지자체 **보조금**은 차량 가격 5,700만 원 미만일 경우 전액 지급(국비+지자체)되며, EV4의 가격대가 이 기준에 충족할 경우 **보조금** 혜택을 받을 수 있습니다. 정확한 **보조금 금액**은 구매 시점의 정책과 거주 지역에 따라 달라지므로, **내돈내산** 견적 상담을 통해 확인하는 것이 가장 정확합니다.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="q3">Q. **기아 EV4 유지비**에서 보험료를 절약하는 **할인 특약**은 무엇이 있나요?</h3>
+                <p>A. **기아 EV4**의 보험료를 절약하기 위해서는 **마일리지 특약** (연간 주행거리 할인), **블랙박스 할인**, **자녀 할인 특약**, **첨단 안전장치 할인** 등을 활용해야 합니다. 특히 **다이렉트자동차보험비교사이트순위** 정보를 참고하여 여러 보험사의 **견적**을 비교할 때, 이러한 특약들을 모두 적용했을 때의 최종 **가격**을 확인하는 것이 중요합니다. **자동차보험료비교**는 **AI** 시스템을 통해 실시간으로 가능하며, 운전 조건에 맞는 **가장 저렴한** 보험사를 찾는 것이 필수입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h3>6. 신뢰할 수 있는 외부 정보 출처</h3>
+            <div class="authority-links">
+                <a href="https://www.fss.or.kr/" target="_blank" rel="nofollow noopener">금융감독원 (FSS)</a>
+                <a href="https://www.kidi.or.kr/" target="_blank" rel="nofollow noopener">보험개발원 (KIDI)</a>
+                <a href="https://www.mopas.go.kr/mopas/index.do" target="_blank" rel="nofollow noopener">행정안전부 (자동차세 정보)</a>
+                <a href="https://www.ev.or.kr/portal/main" target="_blank" rel="nofollow noopener">무공해차 통합누리집 (보조금 정보)</a>
+                <a href="https://namu.wiki/w/%EA%B8%B0%EC%95%84%20EV4" target="_blank" rel="nofollow noopener">나무위키: 기아 EV4 (예상 정보)</a>
+            </div>
+            <p style="font-size: 0.9em; color: #777; margin-top: 15px;">
+                *본 사이트는 정보 제공 목적으로, 실제 계약은 해당 보험사의 약관 및 상품 설명서를 반드시 확인 후 진행하시기 바랍니다.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    // FAQ 토글 기능
+    document.querySelectorAll('.faq-item h3').forEach(item => {
+        item.addEventListener('click', event => {
+            const parent = item.parentElement;
+            parent.classList.toggle('active');
+        });
+    });
+</script>
+  
